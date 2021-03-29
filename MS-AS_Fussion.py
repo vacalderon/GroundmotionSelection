@@ -21,9 +21,9 @@ import shutil
 
 # Mainshock and Aftershock Paths
 
-MS_path= r'C:\ConditionDependent_PBD\EarthquakeSelection\MainShock_Test'
-AS_path= r'C:\ConditionDependent_PBD\EarthquakeSelection\Aftershock_Test'
-Seq_path= r'C:\ConditionDependent_PBD\EarthquakeSelection\Sequences_Test'
+MS_path= r'C:\ConditionDepedentPBEE\GroundmotionSelection\MainShock_Test'
+AS_path= r'C:\ConditionDepedentPBEE\GroundmotionSelection\Aftershock_Test'
+Seq_path= r'C:\ConditionDepedentPBEE\GroundmotionSelection\Sequences_Test'
 
 
 # Reading file names
