@@ -27,8 +27,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.axes as ax
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
+#from selenium import webdriver
+#from selenium.webdriver.support.ui import WebDriverWait
 from bs4 import BeautifulSoup
 import os
 import fnmatch
@@ -94,19 +94,19 @@ plt.show
 
 # Copying already Downloaded files in Kowalsky Group Folder:
 
-source = r"Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles"
-destination = r"C:\Users\vacalder\Documents\TimeDependent_PBEE\EarthquakeSelection\Mainshocks"
-
-for i, row in Main_Shocks.iterrows():
-    if row['downloaded']=="Yes":
-        for filename in os.listdir(r'Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles'):
-            if fnmatch.fnmatch(filename, 'RSN'+str(row['record_sequence_number'])+'*.AT2'):
-                print(filename)
-                filesrc=source+"\\"+filename
-                filedtn=destination+"\\"+filename
-                shutil.copyfile(filesrc,filedtn) 
-    else:
-        print('notdownloaded yet')
+#source = r"Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles"
+#destination = r"C:\Users\vacalder\Documents\TimeDependent_PBEE\EarthquakeSelection\Mainshocks"
+#
+#for i, row in Main_Shocks.iterrows():
+#    if row['downloaded']=="Yes":
+#        for filename in os.listdir(r'Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles'):
+#            if fnmatch.fnmatch(filename, 'RSN'+str(row['record_sequence_number'])+'*.AT2'):
+#                print(filename)
+#                filesrc=source+"\\"+filename
+#                filedtn=destination+"\\"+filename
+#                shutil.copyfile(filesrc,filedtn) 
+#    else:
+#        print('notdownloaded yet')
 
 
 # Accesing  PEER Website
@@ -153,19 +153,19 @@ ASstr=dwnstr2[1:]
 
 # Copying already Downloaded files in Kowalsky Group Folder:
 
-source = r"Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles"
-destination = r"C:\Users\vacalder\Documents\TimeDependent_PBEE\EarthquakeSelection\Aftershocks"
-
-for i, row in Aftershocks.iterrows():
-    if row['downloaded']=="Yes":
-        for filename in os.listdir(r'Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles'):
-            if fnmatch.fnmatch(filename, 'RSN'+str(row['record_sequence_number'])+'*.AT2'):
-                print(filename)
-                filesrc=source+"\\"+filename
-                filedtn=destination+"\\"+filename
-                shutil.copyfile(filesrc,filedtn) 
-    else:
-        print('notdownloaded yet')
+#source = r"Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles"
+#destination = r"C:\Users\vacalder\Documents\TimeDependent_PBEE\EarthquakeSelection\Aftershocks"
+#
+#for i, row in Aftershocks.iterrows():
+#    if row['downloaded']=="Yes":
+#        for filename in os.listdir(r'Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles'):
+#            if fnmatch.fnmatch(filename, 'RSN'+str(row['record_sequence_number'])+'*.AT2'):
+#                print(filename)
+#                filesrc=source+"\\"+filename
+#                filedtn=destination+"\\"+filename
+#                shutil.copyfile(filesrc,filedtn) 
+#    else:
+#        print('notdownloaded yet')
 
 
 #browser = webdriver.Chrome() 
