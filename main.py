@@ -173,15 +173,24 @@ AS_2download=Aftershocks[ASdownloadfilter]
 
 ASdwnstr=''
 
+mainshocks_rsns=[]
+aftershocks_rsns=[]
 for i, row in AS_2download.iterrows():
     ASdwnstr=','+str(row['record_sequence_number'])+ASdwnstr
 
 for j, row in Main_Shocks.iterrows():
    msi=row['station_name']
    print(row['record_sequence_number'])
+   aa=row['record_sequence_number']
    str_as_df=Aftershocks[(Aftershocks.station_name==msi)]['record_sequence_number']
    z=str_as_df.to_numpy()
+   mainshocks_rsns.append(aa)
+   aftershocks_rsns.append(z)
    
+dataDict={'mainshock_rsn':mainshocks_rsns,
+          'aftershocks_rsns':aftershocks_rsns}
+DataFrame_Out=pd.DataFrame(dataDict)
+DataFrame_Out.to_csv(r'C:\ConditionDepedentPBEE\GroundmotionSelection\MS_AS_DB.csv')
 
 # Copying already Downloaded files in Kowalsky Group Folder:
 #
