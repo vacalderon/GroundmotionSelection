@@ -87,7 +87,7 @@ MSstr=dwnstr[1:]
 Number_of_Mainshocks=MSstr.count(',')+1
 
 #Saving Mainshock Database
-Main_Shocks.to_excel(r'C:\ConditionDepedentPBEE\GroundmotionSelection\Mainshock_DB.xlsx')
+#Main_Shocks.to_excel(r'C:\ConditionDepedentPBEE\GroundmotionSelection\Mainshock_DB.xlsx')
 
 MSdownloadfilter=pd.isna(Main_Shocks.downloaded)
 MS_2download=Main_Shocks[MSdownloadfilter]
@@ -107,19 +107,19 @@ plt.show
 
 # Copying already Downloaded files in Kowalsky Group Folder:
 
-source = r"Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles"
-destination = r"C:\ConditionDepedentPBEE\GroundmotionSelection\Mainshocks"
-
-for i, row in Main_Shocks.iterrows():
-    if row['downloaded']=="Yes":
-        for filename in os.listdir(r'Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles'):
-            if fnmatch.fnmatch(filename, 'RSN'+str(row['record_sequence_number'])+'*.AT2'):
-                print(filename)
-                filesrc=source+"\\"+filename
-                filedtn=destination+"\\"+filename
-                shutil.copyfile(filesrc,filedtn) 
-    else:
-        print('notdownloaded yet')
+#source = r"Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles"
+#destination = r"C:\ConditionDepedentPBEE\GroundmotionSelection\Mainshocks"
+#
+#for i, row in Main_Shocks.iterrows():
+#    if row['downloaded']=="Yes":
+#        for filename in os.listdir(r'Q:\My Drive\NGA Ground Motion Downloads\01_AccelerationFiles'):
+#            if fnmatch.fnmatch(filename, 'RSN'+str(row['record_sequence_number'])+'*.AT2'):
+#                print(filename)
+#                filesrc=source+"\\"+filename
+#                filedtn=destination+"\\"+filename
+#                shutil.copyfile(filesrc,filedtn) 
+#    else:
+#        print('notdownloaded yet')
 
 
 # Accesing  PEER Website
@@ -166,7 +166,7 @@ ASstr=dwnstr2[1:]
 Number_of_Aftershocks=ASstr.count(',')+1
 
 #Saving Mainshock Database
-Aftershocks.to_excel(r'C:\ConditionDepedentPBEE\GroundmotionSelection\Aftershock_DB.xlsx')
+#Aftershocks.to_excel(r'C:\ConditionDepedentPBEE\GroundmotionSelection\Aftershock_DB.xlsx')
 
 ASdownloadfilter=pd.isna(Aftershocks.downloaded)
 AS_2download=Aftershocks[ASdownloadfilter]
@@ -175,6 +175,13 @@ ASdwnstr=''
 
 for i, row in AS_2download.iterrows():
     ASdwnstr=','+str(row['record_sequence_number'])+ASdwnstr
+
+for j, row in Main_Shocks.iterrows():
+   msi=row['station_name']
+   print(row['record_sequence_number'])
+   str_as_df=Aftershocks[(Aftershocks.station_name==msi)]['record_sequence_number']
+   z=str_as_df.to_numpy()
+   
 
 # Copying already Downloaded files in Kowalsky Group Folder:
 #
