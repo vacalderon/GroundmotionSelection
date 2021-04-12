@@ -15,6 +15,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
+import RecordMerge
 import fnmatch
 import shutil
 
@@ -50,6 +51,16 @@ PeerDB.columns=PeerDB.columns.str.strip().str.lower().str.replace(' ', '_').str.
 GM_DB = pd.read_csv('MS_AS_DB.csv')
 
 recorded_rsn_ms_as=[]
+outputfilename1_col=[]
+outputfilename2_col=[]
+dt1ms_col=[]
+dt1as_col=[]
+dt2ms_col=[]
+dt2as_col=[]
+rsn_ms1=[]
+rsn_as1=[]
+rsn_ms2=[]
+rsn_as2=[]
 
 for i, row in GM_DB.iterrows():
     ms_rsn=row['mainshock_rsn']
@@ -98,74 +109,43 @@ for i, row in GM_DB.iterrows():
         print('file 1 is:', horizontal_file1_as)
         print('file 2 is:', horizontal_file2_as)
         
-#        check3=os.path.exists(r'Q:\My Drive\PhD Program\Research\Thesis\Analysis Methods\Groundmotions\Mainshocks'+'//'+str(horizontal_file1_as)[2:-2])
-#        check4=os.path.exists(r'Q:\My Drive\PhD Program\Research\Thesis\Analysis Methods\Groundmotions\Mainshocks'+'//'+str(horizontal_file2_as)[2:-2])
-#        if check3==True:
-#            print('Horizontal file 1 of aftershock exists')
-#            
-#        else: 
-#            print('Horizontal file 1 of aftershock does not exists')
-#        
-#        if check4==True:
-#            print('Horizontal file 2 of aftershock exists')
-#            
-#        else: 
-#            print('Horizontal file 2 of aftershock does not exists')    
-
-#for x in MainshockFiles:
-#    for y in AftershockFiles:
-#        
-#
-#        with open(MS_path+'\\'+x) as GM1:
-#            head1  = [next(GM1) for x in range(4)]
-#            Data1 = GM1.read()
-#            GM1.close
-#        #print(head)
-#        
-#        EQ_DataLine1 = head1[3]
-#        dt_pos1      = EQ_DataLine1.find("DT=")
-#        
-#        # Read from i to i+5 in line 3
-#        
-#        dt1  = float(EQ_DataLine1[dt_pos1+5:dt_pos1+11])
-#        a1   = Data1.split()
-#        A1   = [float(i) for i in a1]
-#        NPT1 = len(A1)
-#        TF1  = dt1*NPT1
-#        t1   =np.linspace(dt1,TF1,NPT1)
-#        
-#        #Reading Aftershock
-#        
-#        with open(AS_path+'\\'+y) as GM2:
-#            head2  = [next(GM2) for x in range(4)]
-#            Data2 = GM2.read()
-#            GM2.close
-#        #print(head)
-#        
-#        EQ_DataLine2 = head2[3]
-#        dt_pos2     = EQ_DataLine2.find("DT=")
-#        
-#        # Read from i to i+5 in line 3
-#        
-#        dt2 = float(EQ_DataLine2[dt_pos1+5:dt_pos1+10])
-#        a2  = Data2.split()
-#        A2   = [float(i) for i in a2]
-#        
-#        NPT2   = len(A2)
-#        NPT2new=NPT2*(dt2/dt1)
-#        TF2    = dt2*NPT2
-#        t2     = np.linspace(dt2+TF1,TF2+TF1,NPT2)
-#        t2_new = np.linspace(dt1+TF1,TF2+TF1,int(NPT2new))
-#        A2_new = np.interp(t2_new,t2,A2)
-#        
-#        
-##        plt.plot(t1,A1)
-##        plt.plot(t2,A2)
-##        plt.plot(t2_new,A2_new)
-#        
-#        MS_AS=A1
-#        MS_AS.extend(A2)
-#        
-#        with open(Seq_path+'\\'+x+y+'.g3', 'w') as f:
-#            for item in MS_AS:
-#                f.write("%s\n" % item)
+        mainshockfile1=MS_path+'\\'+str(horizontal_file1)[2:-2]
+        aftershockfile1=AS_path+'\\'+str(horizontal_file1_as)[2:-2]
+        outputfile1=Seq_path+'\\'+str(ms_rsn)+'_'+str(as_rsn)+'_'+'01.g3'
+        
+        mainshockfile2=MS_path+'\\'+str(horizontal_file2)[2:-2]
+        aftershockfile2=AS_path+'\\'+str(horizontal_file2_as)[2:-2]
+        outputfile2=Seq_path+'\\'+str(ms_rsn)+'_'+str(as_rsn)+'_'+'02.g3'
+        
+        merger1=RecordMerge.RecordMerge(mainshockfile1, aftershockfile1, outputfile1)
+        dt_ms1=merger1[0]
+        dt_as1=merger1[1]
+        outputfilename1_col.append(outputfile1)
+        dt1ms_col.append(dt_ms1)
+        dt1as_col.append(dt_as1)
+        rsn_ms1.append(ms_rsn)
+        rsn_as1.append(as_rsn)
+        
+        
+        merger2=RecordMerge.RecordMerge(mainshockfile2, aftershockfile2, outputfile2)
+        dt_ms2=merger2[0]
+        dt_as2=merger2[1]
+        outputfilename2_col.append(outputfile2)
+        dt2ms_col.append(dt_ms2)
+        dt2as_col.append(dt_as2)
+        rsn_ms2.append(ms_rsn)
+        rsn_as2.append(as_rsn)
+        
+dataDict={'mainshock_aferchock_horizontal1':outputfilename1_col,
+          'dt_mainshock_horizontal1':dt1ms_col,
+          'dt_aftershock_horizontal1':dt1as_col,
+          'rsn_mainshock_horizontal1':rsn_ms1,
+          'rsn_aftershock_horizontal1':rsn_as1,
+          'mainshock_aferchock_horizontal2':outputfilename2_col,
+          'dt_mainshock_horizontal2':dt2ms_col,
+          'dt_aftershock_horizontal2':dt2as_col,
+          'rsn_mainshock_horizontal2':rsn_ms2,
+          'rsn_aftershock_horizontal2':rsn_as2,}
+DataFrame_Out=pd.DataFrame(dataDict)
+DataFrame_Out.to_csv('mainshock_aftershock_file_database.csv')
+        
