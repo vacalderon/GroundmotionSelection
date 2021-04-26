@@ -55,8 +55,16 @@ outputfilename1_col=[]
 outputfilename2_col=[]
 dt1ms_col=[]
 dt1as_col=[]
+dt1seq_col=[]
 dt2ms_col=[]
 dt2as_col=[]
+dt2seq_col=[]
+npt1ms_col=[]
+npt2ms_col=[]
+npt1as_col=[]
+npt2as_col=[]
+npt1seq_col=[]
+npt2seq_col=[]
 rsn_ms1=[]
 rsn_as1=[]
 rsn_ms2=[]
@@ -116,34 +124,62 @@ for i, row in GM_DB.iterrows():
         mainshockfile2=MS_path+'\\'+str(horizontal_file2)[2:-2]
         aftershockfile2=AS_path+'\\'+str(horizontal_file2_as)[2:-2]
         outputfile2=Seq_path+'\\'+str(ms_rsn)+'_'+str(as_rsn)+'_'+'02.g3'
-        
+
+
+
         merger1=RecordMerge.RecordMerge(mainshockfile1, aftershockfile1, outputfile1)
         dt_ms1=merger1[0]
-        dt_as1=merger1[1]
+        npt_ms1=merger1[1]
+        dt_as1=merger1[2]
+        npt_as1=merger1[3]
+        dt_seq1=merger1[4]
+        npt_seq1=merger1[5]
+        npt_4s1=merger1[6]
         outputfilename1_col.append(outputfile1)
         dt1ms_col.append(dt_ms1)
+        npt1ms_col.append(npt_ms1)
         dt1as_col.append(dt_as1)
+        npt1as_col.append(npt_as1)
+        dt1seq_col.append(dt_seq1)
+        npt1seq_col.append(npt_seq1)
         rsn_ms1.append(ms_rsn)
         rsn_as1.append(as_rsn)
         
         
         merger2=RecordMerge.RecordMerge(mainshockfile2, aftershockfile2, outputfile2)
         dt_ms2=merger2[0]
-        dt_as2=merger2[1]
+        npt_ms2=merger2[1]
+        dt_as2=merger2[2]
+        npt_as2=merger2[3]
+        dt_seq2=merger2[4]
+        npt_seq2=merger2[5]
+        npt_4s2=merger2[6]
         outputfilename2_col.append(outputfile2)
         dt2ms_col.append(dt_ms2)
+        npt2ms_col.append(npt_ms2)
         dt2as_col.append(dt_as2)
+        npt2as_col.append(npt_as2)
+        dt2seq_col.append(dt_seq2)
+        npt2seq_col.append(npt_seq2)
         rsn_ms2.append(ms_rsn)
         rsn_as2.append(as_rsn)
         
 dataDict={'mainshock_aferchock_horizontal1':outputfilename1_col,
+          'dt_sequence_horizontal1':dt1seq_col,
+          'npt_sequence_horizontal1':npt1seq_col,
           'dt_mainshock_horizontal1':dt1ms_col,
+          'npt_mainshock_horizontal1':npt1ms_col,
           'dt_aftershock_horizontal1':dt1as_col,
+          'npt_aftershock_horizontal1':npt1as_col,
           'rsn_mainshock_horizontal1':rsn_ms1,
           'rsn_aftershock_horizontal1':rsn_as1,
           'mainshock_aferchock_horizontal2':outputfilename2_col,
+          'dt_sequence_horizontal2':dt2seq_col,
+          'npt_sequence_horizontal2':npt2seq_col,
           'dt_mainshock_horizontal2':dt2ms_col,
+          'npt_mainshock_horizontal2':npt2ms_col,
           'dt_aftershock_horizontal2':dt2as_col,
+          'npt_aftershock_horizontal2':npt2as_col,
           'rsn_mainshock_horizontal2':rsn_ms2,
           'rsn_aftershock_horizontal2':rsn_as2,}
 DataFrame_Out=pd.DataFrame(dataDict)
