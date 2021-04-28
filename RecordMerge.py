@@ -52,7 +52,7 @@ def RecordMerge(mainshockfile, aftershockfile, outputfile):
         npt4s = NoAccelerationTime / dt4s
         TF4S = npt4s * dt4s
         A4S = np.zeros(int(npt4s))
-        t4s = np.linspace(dt4s + TF1, TF4S + TF1, npt4s)
+        t4s = np.linspace(dt4s + TF1, TF4S + TF1, int(npt4s))
 
         # Afterchock read
 
@@ -99,7 +99,7 @@ def RecordMerge(mainshockfile, aftershockfile, outputfile):
         npt4s = NoAccelerationTime / dt4s
         TF4S = npt4s * dt4s
         A4S = np.zeros(int(npt4s))
-        t4s = np.linspace(dt4s + TF1, TF4S + TF1, npt4s)
+        t4s = np.linspace(dt4s + TF1, TF4S + TF1, int(npt4s))
 
         # Afterchock read
 

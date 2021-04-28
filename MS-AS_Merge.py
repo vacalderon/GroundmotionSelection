@@ -52,7 +52,9 @@ GM_DB = pd.read_csv('MS_AS_DB.csv')
 
 recorded_rsn_ms_as=[]
 outputfilename1_col=[]
+filename1_col=[]
 outputfilename2_col=[]
+filename2_col=[]
 dt1ms_col=[]
 dt1as_col=[]
 dt1seq_col=[]
@@ -120,11 +122,11 @@ for i, row in GM_DB.iterrows():
         mainshockfile1=MS_path+'\\'+str(horizontal_file1)[2:-2]
         aftershockfile1=AS_path+'\\'+str(horizontal_file1_as)[2:-2]
         outputfile1=Seq_path+'\\'+str(ms_rsn)+'_'+str(as_rsn)+'_'+'01.g3'
-        
+        file1=str(ms_rsn)+'_'+str(as_rsn)+'_'+'01.g3'
         mainshockfile2=MS_path+'\\'+str(horizontal_file2)[2:-2]
         aftershockfile2=AS_path+'\\'+str(horizontal_file2_as)[2:-2]
         outputfile2=Seq_path+'\\'+str(ms_rsn)+'_'+str(as_rsn)+'_'+'02.g3'
-
+        file2 = str(ms_rsn) + '_' + str(as_rsn) + '_' + '02.g3'
 
 
         merger1=RecordMerge.RecordMerge(mainshockfile1, aftershockfile1, outputfile1)
@@ -136,6 +138,7 @@ for i, row in GM_DB.iterrows():
         npt_seq1=merger1[5]
         npt_4s1=merger1[6]
         outputfilename1_col.append(outputfile1)
+        filename1_col.append(file1)
         dt1ms_col.append(dt_ms1)
         npt1ms_col.append(npt_ms1)
         dt1as_col.append(dt_as1)
@@ -155,6 +158,7 @@ for i, row in GM_DB.iterrows():
         npt_seq2=merger2[5]
         npt_4s2=merger2[6]
         outputfilename2_col.append(outputfile2)
+        filename2_col.append(file2)
         dt2ms_col.append(dt_ms2)
         npt2ms_col.append(npt_ms2)
         dt2as_col.append(dt_as2)
@@ -165,6 +169,7 @@ for i, row in GM_DB.iterrows():
         rsn_as2.append(as_rsn)
         
 dataDict={'mainshock_aferchock_horizontal1':outputfilename1_col,
+          'horizontal_1_filename':filename1_col,
           'dt_sequence_horizontal1':dt1seq_col,
           'npt_sequence_horizontal1':npt1seq_col,
           'dt_mainshock_horizontal1':dt1ms_col,
@@ -174,6 +179,7 @@ dataDict={'mainshock_aferchock_horizontal1':outputfilename1_col,
           'rsn_mainshock_horizontal1':rsn_ms1,
           'rsn_aftershock_horizontal1':rsn_as1,
           'mainshock_aferchock_horizontal2':outputfilename2_col,
+          'horizontal_2_filename':filename2_col,
           'dt_sequence_horizontal2':dt2seq_col,
           'npt_sequence_horizontal2':npt2seq_col,
           'dt_mainshock_horizontal2':dt2ms_col,
