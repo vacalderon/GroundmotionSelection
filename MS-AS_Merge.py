@@ -10,14 +10,11 @@ Created on Tue Jun 25 10:54:51 2019
 #   PhD Student/ Research Assistant
 #   NC STATE UNIVERSITY 
 #   2021 (c)
-import math  as math
-import numpy as np
-import matplotlib.pyplot as plt
+
 import pandas as pd
 import os
 import RecordMerge
-import fnmatch
-import shutil
+
 
 
 # Mainshock and Aftershock Paths
