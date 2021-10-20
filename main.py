@@ -98,7 +98,7 @@ for i, row in MS_2download.iterrows():
     MSdwnstr=','+str(row['record_sequence_number'])+MSdwnstr
 
 
-Main_Shocks.plot.scatter(x='joyner_booredist_km',y='earthquake_magnitude',s=20,c='earthquake_magnitude',colormap='viridis')
+x`(x='joyner_booredist_km',y='earthquake_magnitude',s=20,c='earthquake_magnitude',colormap='viridis')
 plt.title('Main Shock Selection',fontsize=32)
 plt.xlabel('Rrup (km)',fontsize=24)
 plt.ylabel('Magnitude (Mw)',fontsize=24)
